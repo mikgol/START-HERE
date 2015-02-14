@@ -81,6 +81,8 @@ var app = {
 */
     manageConnection: function () {
 
+        alert('in manage connection');
+
         // connect() will get called only if isConnected() (below)
         // returns failure. In other words, if not connected, then connect:
         var connect = function () {
