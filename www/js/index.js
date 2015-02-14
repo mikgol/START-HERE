@@ -114,7 +114,14 @@ var app = {
 
         // here's the real action of the manageConnection function:
         alert('about to do thing');
-        bluetoothSerial.isConnected(disconnect, connect);
+        try {
+            bluetoothSerial.isConnected(disconnect, connect);
+        }
+        catch (e) {
+            // statements to handle any exceptions
+            alert(e); // pass exception object to error handler
+        }
+        
         alert('done');
     },
     /*
