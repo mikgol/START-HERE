@@ -113,6 +113,7 @@ var app = {
         };
 
         // here's the real action of the manageConnection function:
+        alert('about to do thing');
         bluetoothSerial.isConnected(disconnect, connect);
         alert('done');
     },
