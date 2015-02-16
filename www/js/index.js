@@ -178,6 +178,8 @@ var app = {
         appends @message to the message div:
     */
     display: function (message) {
+        alert(message);
+        return;
         var display = document.getElementById("message"), // the message div
             lineBreak = document.createElement("br"),     // a line break
             label = document.createTextNode(message);     // create the label
