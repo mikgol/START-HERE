@@ -89,15 +89,21 @@ var app = {
             alert('in connect');
             // if not connected, do this:
             // clear the screen and display an attempt to connect
-            app.clear();
-            app.display("Attempting to connect. " +
-                "Make sure the serial port is open on the target device.");
-            // attempt to connect:
-            bluetoothSerial.connect(
-                app.macAddress,  // device to connect to
-                app.openPort,    // start listening if you succeed
-                app.showError    // show the error if you fail
-            );
+            try {
+                app.clear();
+                app.display("Attempting to connect. " +
+                    "Make sure the serial port is open on the target device.");
+                // attempt to connect:
+                bluetoothSerial.connect(
+                    app.macAddress,  // device to connect to
+                    app.openPort,    // start listening if you succeed
+                    app.showError    // show the error if you fail
+                );
+            } catch (e) {
+                alert(e.message);
+            }
+            
+            alert('connect done');
         };
 
         // disconnect() will get called only if isConnected() (below)
