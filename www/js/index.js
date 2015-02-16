@@ -129,6 +129,7 @@ var app = {
         and changes the button:
     */
     openPort: function () {
+        alert('in openPort');
         // if you get a good Bluetooth serial connection:
         app.display("Connected to: " + app.macAddress);
         // change the button's name:
@@ -146,6 +147,7 @@ var app = {
         unsubscribes from any Bluetooth serial listener and changes the button:
     */
     closePort: function () {
+        alert("in closePort");
         // if you get a good Bluetooth serial connection:
         app.display("Disconnected from: " + app.macAddress);
         // change the button's name:
@@ -162,6 +164,7 @@ var app = {
         appends @error to the message div:
     */
     showError: function (error) {
+        alert(error);
         app.display(error);
     },
 
