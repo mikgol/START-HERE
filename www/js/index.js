@@ -193,7 +193,124 @@ var app = {
     clear: function () {
         var display = document.getElementById("message");
         //display.innerHTML = "";
+    },
+    
+    ClearCmd: function() {
+        $('#divCmd').html('');
+    },
+
+    Delete: function(i) {
+
+        var names = [];
+        var values = [];
+
+        names = JSON.parse(localStorage["names"]);
+        values = JSON.parse(localStorage["values"]);
+
+        names.splice(i, 1)
+        values.splice(i, 1)
+
+        localStorage["names"] = JSON.stringify(names);
+        localStorage["values"] = JSON.stringify(values);
+
+        RestoreFromLocal();        
+    },
+
+    DoSend: function(i) {
+        var arrVal= JSON.parse(localStorage["values"]);
+        alert('sending: ' + arrVal[i]);
+    },
+
+    SendTmp: function() {
+        alert('sending: ' + $('#divCmd').html() + 'x');
+    },
+
+    Save: function() {
+
+        if ($('#inpSave').val() == '') {
+            alert('enter a name');
+            return;
+        }
+        if ($('#divCmd').html() == '') {
+            alert('nothing to save');
+            return;
+        }
+
+        var names = [];
+        var values = [];
+
+        if (localStorage["names"] != undefined) {
+            names = JSON.parse(localStorage["names"]);
+            values = JSON.parse(localStorage["values"]);
+        }
+        var len = names.length;
+        names[len] = $('#inpSave').val();
+        values[len] = $('#divCmd').html() + 'x';
+
+        localStorage["names"] = JSON.stringify(names);
+        localStorage["values"] = JSON.stringify(values);
+
+        RestoreFromLocal();        
+    },
+
+    RestoreFromLocal: function() {
+        var xHTML = '';
+
+        if (localStorage["names"] == undefined) return;
+
+        var arr = JSON.parse(localStorage["names"]);
+        var arrVal= JSON.parse(localStorage["values"]);
+
+        for (var i = 0; i < arr.length; i++) {
+            xHTML += '<div><b>' + arr[i] + '</b>: <span class="dataVal' + i + '">' + arrVal[i] + '</span> <a href="#" onclick="DoSend(' + i + '); return false">send</a> <a href="#" onclick="Delete(' + i + '); return false">delete</a></div>';
+        }
+
+        $('#divResult').html(xHTML);
+    },
+
+    ToggleMe: function(obj) {
+        if ($(obj).hasClass('selected')) {
+            $(obj).removeClass('selected');
+        } else {
+            $(obj).addClass('selected');
+        }
+    },
+
+    AddCommand: function() {
+        var cmd = "00000000";
+        $('.selected').each(function() {
+            var idx = parseInt($(this).attr('data-id'));
+            cmd = replaceAt(cmd, idx, '1');
+        });
+        cmd = 'c' + cmd;
+        $('#divCmd').html($('#divCmd').html() + cmd);
+    },
+
+    SendRandom: function() {
+        var cmd = 'r' + $('#selRnd').val();
+        $('#divCmd').html($('#divCmd').html() + cmd);
+    },
+
+    SendDelay: function() {
+        if ($('#inpDelay').val() == '') {
+            alert('enter number of ms');
+            return;
+        }
+        if (isNaN($('#inpDelay').val()) || $('#inpDelay').val().indexOf(".") >= 0 || $('#inpDelay').val().indexOf(" ") >= 0) {
+            alert('enter whole numbers only');
+            return;
+        }
+        var cmd = 'd' + pad($('#inpDelay').val(), 5);
+        $('#divCmd').html($('#divCmd').html() + cmd);
+        
+    },
+
+    replaceAt: function(str, index, character) {
+        return str.substr(0, index) + character + str.substr(index+character.length);
+    },
+
+    pad: function (str, max) {
+        str = str.toString();
+        return str.length < max ? pad("0" + str, max) : str;
     }
-
-
 };

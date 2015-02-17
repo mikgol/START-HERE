@@ -32,9 +32,59 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
-            <div>
-                <a href="#" onclick="app.manageConnection(); return false;">CONNECT</a>
+            <div style="float: left">
+                <div id="divL1" data-id="0" onclick="ToggleMe(this);">
+                    left 1
+                </div>
+                <div id="divL2" data-id="1" onclick="ToggleMe(this);">
+                    left 2
+                </div>
+                <div id="divL3" data-id="2" onclick="ToggleMe(this);">
+                    left 3
+                </div>
+                <div id="divL4" data-id="3" onclick="ToggleMe(this);">
+                    left 4
+                </div>
             </div>
+            <div style="float: left; margin-left: 15px">
+                <div id="divR1" data-id="4" onclick="ToggleMe(this);">
+                    right 1
+                </div>
+                <div id="divR2" data-id="5" onclick="ToggleMe(this);">
+                    right 2
+                </div>
+                <div id="divR3" data-id="6" onclick="ToggleMe(this);">
+                    right 3
+                </div>
+                <div id="divR4" data-id="7" onclick="ToggleMe(this);">
+                    right 4
+                </div>
+            </div>
+            <div style="clear: both"></div>
+            <a href="#" onclick="AddCommand(); return false">add command</a>
+            <hr />
+            <select id="selRnd">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+            </select>
+            <a href="#" onclick="SendRandom(); return false">random</a>
+            <hr />
+            <input type="text" id="inpDelay" />
+            <a href="#" onclick="SendDelay(); return false">delay</a>
+            <hr />
+
+            <div id="divCmd"></div>
+            <a href="#" onclick="SendTmp(); return false;">send<a/> <a href="#" onclick="Clear(); return false">clear</a>
+            <hr />
+            <br /> <input type="text" id="inpSave" /> <a href="#" onclick="Save(); return false">save</a>
+            <hr />
+            <div id="divResult"></div>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
