@@ -219,10 +219,12 @@ var app = {
     DoSend: function(i) {
         var arrVal= JSON.parse(localStorage["values"]);
         alert('sending: ' + arrVal[i]);
+        bluetoothSerial.write(arrVal[i], function () { alert('success'); }, function () { alert('fail'); });
     },
 
     SendTmp: function() {
         alert('sending: ' + $('#divCmd').html() + 'x');
+        bluetoothSerial.write($('#divCmd').html() + 'x', function () { alert('success'); }, function () { alert('fail'); });
     },
 
     Save: function() {
@@ -250,7 +252,7 @@ var app = {
         localStorage["names"] = JSON.stringify(names);
         localStorage["values"] = JSON.stringify(values);
 
-        RestoreFromLocal();        
+        app.RestoreFromLocal();        
     },
 
     RestoreFromLocal: function() {

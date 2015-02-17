@@ -38,6 +38,9 @@
                 <p class="event listening">Connecting to Device</p>
                 <p class="event received">Device is Ready</p>
             </div>
+            <div>
+                <a href="#" onclick="app.manageConnection(); return false;">CONNECT</a>
+            </div>
             <div style="float: left">
                 <div id="divL1" data-id="0" onclick="app.ToggleMe(this);">
                     left 1
@@ -86,7 +89,7 @@
             <hr />
 
             <div id="divCmd"></div>
-            <a href="#" onclick="app.SendTmp(); return false;">send</a> <a href="#" onclick="app.Clear(); return false">clear</a>
+            <a href="#" onclick="app.SendTmp(); return false;">send</a> <a href="#" onclick="app.ClearCmd(); return false">clear</a>
             <hr />
             <br /> <input type="text" id="inpSave" /> <a href="#" onclick="app.Save(); return false">save</a>
             <hr />
