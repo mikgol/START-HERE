@@ -268,7 +268,7 @@ var app = {
         $('#divResult').html(xHTML);
     },
 
-    ToggleMe: function(obj) {
+    ToggleMe: function (obj) {
         if ($(obj).hasClass('selected')) {
             $(obj).removeClass('selected');
         } else {
@@ -280,7 +280,7 @@ var app = {
         var cmd = "00000000";
         $('.selected').each(function() {
             var idx = parseInt($(this).attr('data-id'));
-            cmd = replaceAt(cmd, idx, '1');
+            cmd = app.replaceAt(cmd, idx, '1');
         });
         cmd = 'c' + cmd;
         $('#divCmd').html($('#divCmd').html() + cmd);
