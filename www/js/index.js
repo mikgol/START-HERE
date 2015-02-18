@@ -312,8 +312,6 @@ var app = {
         } catch (e) {
             alert(e.message);
         }
-        
-        
     },
 
     replaceAt: function(str, index, character) {
