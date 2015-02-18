@@ -298,21 +298,16 @@ var app = {
     },
 
     SendDelay: function () {
-        alert('1');
         if ($('#inpDelay').val() == '') {
             alert('enter number of ms');
             return;
         }
-        alert('2');
         if (isNaN($('#inpDelay').val()) || $('#inpDelay').val().indexOf(".") >= 0 || $('#inpDelay').val().indexOf(" ") >= 0) {
             alert('enter whole numbers only');
             return;
         }
-        alert('3');
-        var cmd = 'd' + pad($('#inpDelay').val(), 5);
-        alert('4');
+        var cmd = 'd' + app.pad($('#inpDelay').val(), 5);
         $('#divCmd').html($('#divCmd').html() + cmd);
-        alert('5');
         
     },
 
