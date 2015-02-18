@@ -320,6 +320,6 @@ var app = {
 
     pad: function (str, max) {
         str = str.toString();
-        return str.length < max ? pad("0" + str, max) : str;
+        return str.length < max ? app.pad("0" + str, max) : str;
     }
 };
