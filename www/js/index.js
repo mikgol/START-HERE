@@ -268,7 +268,7 @@ var app = {
         var arrVal= JSON.parse(localStorage["values"]);
 
         for (var i = 0; i < arr.length; i++) {
-            xHTML += '<div><b>' + arr[i] + '</b>: <span class="dataVal' + i + '">' + arrVal[i] + '</span> <a href="#" onclick="DoSend(' + i + '); return false">send</a> <a href="#" onclick="Delete(' + i + '); return false">delete</a></div>';
+            xHTML += '<div><b>' + arr[i] + '</b>: <span class="dataVal' + i + '">' + arrVal[i] + '</span> <a href="#" onclick="DoSend(' + i + '); return false">send</a> <a href="#" onclick="app.Delete(' + i + '); return false">delete</a></div>';
         }
 
         $('#divResult').html(xHTML);
