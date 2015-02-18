@@ -297,17 +297,22 @@ var app = {
         $('#divCmd').html($('#divCmd').html() + cmd);
     },
 
-    SendDelay: function() {
+    SendDelay: function () {
+        alert('1');
         if ($('#inpDelay').val() == '') {
             alert('enter number of ms');
             return;
         }
+        alert('2');
         if (isNaN($('#inpDelay').val()) || $('#inpDelay').val().indexOf(".") >= 0 || $('#inpDelay').val().indexOf(" ") >= 0) {
             alert('enter whole numbers only');
             return;
         }
+        alert('3');
         var cmd = 'd' + pad($('#inpDelay').val(), 5);
+        alert('4');
         $('#divCmd').html($('#divCmd').html() + cmd);
+        alert('5');
         
     },
 
