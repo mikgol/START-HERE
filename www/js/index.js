@@ -81,12 +81,12 @@ var app = {
 */
     manageConnection: function () {
 
-        alert('in manage connection');
+        
 
         // connect() will get called only if isConnected() (below)
         // returns failure. In other words, if not connected, then connect:
         var connect = function () {
-            alert('in connect');
+            
             // if not connected, do this:
             // clear the screen and display an attempt to connect
             try {
@@ -100,16 +100,16 @@ var app = {
                     app.showError    // show the error if you fail
                 );
             } catch (e) {
-                alert(e.message);
+                alert('Exception: ' + e.message);
             }
             
-            alert('connect done');
+            
         };
 
         // disconnect() will get called only if isConnected() (below)
         // returns success  In other words, if  connected, then disconnect:
         var disconnect = function () {
-            alert('in disconnect');
+            
             app.display("attempting to disconnect");
             // if connected, do this:
             bluetoothSerial.disconnect(
@@ -119,7 +119,7 @@ var app = {
         };
 
         // here's the real action of the manageConnection function:
-        alert('about to do thing');
+        
         try {
             bluetoothSerial.isConnected(disconnect, connect);
         }
@@ -128,16 +128,16 @@ var app = {
             alert(e); // pass exception object to error handler
         }
         
-        alert('done');
+        
     },
     /*
         subscribes to a Bluetooth serial listener for newline
         and changes the button:
     */
     openPort: function () {
-        alert('in openPort');
+        
         // if you get a good Bluetooth serial connection:
-        app.display("Connected to: " + app.macAddress);
+        
         // change the button's name:
         //connectButton.innerHTML = "Disconnect";
         // set up a listener to listen for newlines
@@ -147,15 +147,17 @@ var app = {
             app.clear();
             app.display(data);
         });
+        $('#divFunctions').show();
+        $('#divConnect').hide();
     },
 
     /*
         unsubscribes from any Bluetooth serial listener and changes the button:
     */
     closePort: function () {
-        alert("in closePort");
+        
         // if you get a good Bluetooth serial connection:
-        app.display("Disconnected from: " + app.macAddress);
+        
         // change the button's name:
         //connectButton.innerHTML = "Connect";
         // unsubscribe from listening:
@@ -165,12 +167,14 @@ var app = {
                 },
                 app.showError
         );
+        $('#divFunctions').hide();
+        $('#divConnect').show();
     },
     /*
         appends @error to the message div:
     */
     showError: function (error) {
-        alert(error);
+        alert('Error: ' + error);
         app.display(error);
     },
 
@@ -178,7 +182,7 @@ var app = {
         appends @message to the message div:
     */
     display: function (message) {
-        alert(message);
+        
         return;
         var display = document.getElementById("message"), // the message div
             lineBreak = document.createElement("br"),     // a line break
@@ -218,12 +222,12 @@ var app = {
 
     DoSend: function(i) {
         var arrVal= JSON.parse(localStorage["values"]);
-        alert('sending: ' + arrVal[i]);
+        
         bluetoothSerial.write(arrVal[i], function () { alert('success'); }, function () { alert('fail'); });
     },
 
     SendTmp: function() {
-        alert('sending: ' + $('#divCmd').html() + 'x');
+        
         bluetoothSerial.write($('#divCmd').html() + 'x', function () { alert('success'); }, function () { alert('fail'); });
     },
 
