@@ -306,8 +306,13 @@ var app = {
             alert('enter whole numbers only');
             return;
         }
-        var cmd = 'd' + app.pad($('#inpDelay').val(), 5);
-        $('#divCmd').html($('#divCmd').html() + cmd);
+        try {
+            var cmd = 'd' + app.pad($('#inpDelay').val(), 5);
+            $('#divCmd').html($('#divCmd').html() + cmd);
+        } catch (e) {
+            alert(e.message);
+        }
+        
         
     },
 
