@@ -16,10 +16,12 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+var db = window.openDatabase("brain", "1.0", "brain", 1000000);
 var app = {
 
     macAddress: "00:00:12:09:32:96",  // get your mac address from bluetoothSerial.list
     chars: "",
+    
 
 
     // Application Constructor
@@ -225,6 +227,9 @@ var app = {
         
         bluetoothSerial.write(arrVal[i], function () { alert('success'); }, function () { alert('fail'); });
     },
+    CmdSend: function (v) {
+        bluetoothSerial.write(v, function () { alert('success'); }, function () { alert('fail'); });
+    },
 
     SendTmp: function() {
         
@@ -241,6 +246,10 @@ var app = {
             alert('nothing to save');
             return;
         }
+
+
+        app.insertPattern($('#inpSave').val(), $('#divCmd').html());
+        return;
 
         var names = [];
         var values = [];
@@ -289,6 +298,7 @@ var app = {
             cmd = app.replaceAt(cmd, idx, '1');
         });
         cmd = 'c' + cmd;
+        
         $('#divCmd').html($('#divCmd').html() + cmd);
     },
 
@@ -321,5 +331,34 @@ var app = {
     pad: function (str, max) {
         str = str.toString();
         return str.length < max ? app.pad("0" + str, max) : str;
+    },
+    insertPattern: function (name, value) {
+       db.transaction(function(tx) {
+           tx.executeSql('INSERT INTO Patterns (name, value) VALUES (?, ?)', [name, value]);
+       });
+        app.renderPatterns();
+    },
+
+    renderResults: function(tx, rs) {
+    var xHTML = '';
+    for(var i=0; i < rs.rows.length; i++) {
+        r = rs.rows.item(i);
+        xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a>';
     }
+    $('#divResult').html(xHTML);
+    },
+
+    /* call this one */
+    renderPatterns: function() {
+    db.transaction(function(tx) {
+        tx.executeSql('SELECT * FROM Patterns', [], app.renderResults);
+    });
+}
 };
+$(document).ready(function () {
+    db.transaction(function (tx) {
+        tx.executeSql('CREATE TABLE IF NOT EXISTS Patterns(id INTEGER PRIMARY KEY, name TEXT, value TEXT)', []);
+    });
+
+    app.renderPatterns();
+});
