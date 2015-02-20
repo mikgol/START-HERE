@@ -210,21 +210,12 @@ var app = {
         $('#divCmd').html('');
     },
 
-    Delete: function(i) {
+    Delete: function(id) {
 
-        var names = [];
-        var values = [];
-
-        names = JSON.parse(localStorage["names"]);
-        values = JSON.parse(localStorage["values"]);
-
-        names.splice(i, 1)
-        values.splice(i, 1)
-
-        localStorage["names"] = JSON.stringify(names);
-        localStorage["values"] = JSON.stringify(values);
-
-        RestoreFromLocal();        
+        db.transaction(function (tx) {
+            tx.executeSql('DELETE FROM Patterns WHERE id = ' + id, [], app.renderResults);
+        });
+        
     },
 
     DoSend: function(i) {
@@ -255,39 +246,10 @@ var app = {
 
         app.insertPattern($('#inpSave').val(), $('#divCmd').html());
         return;
-
-        var names = [];
-        var values = [];
-
-        if (localStorage["names"] != undefined) {
-            names = JSON.parse(localStorage["names"]);
-            values = JSON.parse(localStorage["values"]);
-        }
-        var len = names.length;
-        names[len] = $('#inpSave').val();
-        values[len] = $('#divCmd').html() + 'x';
-
-        localStorage["names"] = JSON.stringify(names);
-        localStorage["values"] = JSON.stringify(values);
-
-        app.RestoreFromLocal();        
+    
     },
 
-    RestoreFromLocal: function() {
-        var xHTML = '';
-
-        if (localStorage["names"] == undefined) return;
-
-        var arr = JSON.parse(localStorage["names"]);
-        var arrVal= JSON.parse(localStorage["values"]);
-
-        for (var i = 0; i < arr.length; i++) {
-            xHTML += '<div><b>' + arr[i] + '</b>: <span class="dataVal' + i + '">' + arrVal[i] + '</span> <a href="#" onclick="DoSend(' + i + '); return false">send</a> <a href="#" onclick="app.Delete(' + i + '); return false">delete</a></div>';
-        }
-
-        $('#divResult').html(xHTML);
-    },
-
+   
     ToggleMe: function (obj) {
         if ($(obj).hasClass('selected')) {
             $(obj).removeClass('selected');
@@ -345,12 +307,12 @@ var app = {
     },
 
     renderResults: function (tx, rs) {
-        alert('in RenderResults');
+
         try {
             var xHTML = '';
             for(var i=0; i < rs.rows.length; i++) {
                 r = rs.rows.item(i);
-                xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a>';
+                xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a> <a href="#" onclick=\'app.Delete("' + r['id'] + '"); return false;\'>DELETE</a> </div>';
             }
             $('#divResult').html(xHTML);
         } catch (e) {
@@ -360,7 +322,7 @@ var app = {
 
     /* call this one */
     renderPatterns: function () {
-        alert('in renderPatterns');
+        
         try {
             db.transaction(function(tx) {
                 tx.executeSql('SELECT * FROM Patterns', [], app.renderResults);
