@@ -313,6 +313,8 @@ var app = {
 
     renderResults: function (tx, rs) {
 
+        alert('in renderResults' + tx + ',' + rs);
+
         try {
             var xHTML = '';
             for(var i=0; i < rs.rows.length; i++) {
