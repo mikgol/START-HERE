@@ -368,6 +368,7 @@ var app = {
 }
 };
 $(document).ready(function () {
+    alert('blah');
     db.transaction(function (tx) {
         tx.executeSql('CREATE TABLE IF NOT EXISTS Patterns(id INTEGER PRIMARY KEY, name TEXT, value TEXT)', []);
     });
