@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-var db = window.openDatabase("brain", "1.0", "brain", 1000000);
+var db;
 var app = {
 
     macAddress: "00:00:12:09:32:96",  // get your mac address from bluetoothSerial.list
@@ -42,6 +42,7 @@ var app = {
     onDeviceReady: function () {
 
         app.receivedEvent('deviceready');
+        db = window.sqlitePlugin.openDatabase("brain", "1.0", "brain", 1000000);
 
         var listPorts = function () {
             // list the available BT ports:
