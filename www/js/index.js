@@ -214,7 +214,7 @@ var app = {
 
         try {
             db.transaction(function (tx) {
-                tx.executeSql('DELETE FROM Patterns WHERE id = ' + id, [], app.renderResults);
+                tx.executeSql('DELETE FROM Patterns WHERE id = ' + id, [], app.renderPatterns);
             });
         } catch (e) {
             alert('delete: ' + e.message);
@@ -312,8 +312,6 @@ var app = {
     },
 
     renderResults: function (tx, rs) {
-
-        alert('in renderResults' + tx + ',' + rs);
 
         try {
             var xHTML = '';
