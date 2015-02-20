@@ -212,9 +212,14 @@ var app = {
 
     Delete: function(id) {
 
-        db.transaction(function (tx) {
-            tx.executeSql('DELETE FROM Patterns WHERE id = ' + id, [], app.renderResults);
-        });
+        try {
+            db.transaction(function (tx) {
+                tx.executeSql('DELETE FROM Patterns WHERE id = ' + id, [], app.renderResults);
+            });
+        } catch (e) {
+            alert('delete: ' + e.message);
+        }
+        
         
     },
 
