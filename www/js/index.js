@@ -317,7 +317,7 @@ var app = {
             var xHTML = '';
             for(var i=0; i < rs.rows.length; i++) {
                 r = rs.rows.item(i);
-                xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a> <a href="#" onclick=\'app.Delete("' + r['id'] + '"); return false;\'>DELETE</a> </div>';
+                xHTML += '<div><b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a> <a href="#" onclick=\'app.Delete("' + r['id'] + '"); return false;\'>DELETE</a> </div>';
             }
             $('#divResult').html(xHTML);
         } catch (e) {
