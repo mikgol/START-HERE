@@ -43,7 +43,11 @@ var app = {
 
         app.receivedEvent('deviceready');
         db = window.sqlitePlugin.openDatabase("brain", "1.0", "brain", 1000000);
+        db.transaction(function (tx) {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Patterns(id INTEGER PRIMARY KEY, name TEXT, value TEXT)', []);
+        });
 
+        app.renderPatterns();
         var listPorts = function () {
             // list the available BT ports:
             bluetoothSerial.list(
@@ -367,11 +371,3 @@ var app = {
     
 }
 };
-$(document).ready(function () {
-    alert('blah');
-    db.transaction(function (tx) {
-        tx.executeSql('CREATE TABLE IF NOT EXISTS Patterns(id INTEGER PRIMARY KEY, name TEXT, value TEXT)', []);
-    });
-
-    app.renderPatterns();
-});
