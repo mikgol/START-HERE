@@ -340,21 +340,31 @@ var app = {
         app.renderPatterns();
     },
 
-    renderResults: function(tx, rs) {
-    var xHTML = '';
-    for(var i=0; i < rs.rows.length; i++) {
-        r = rs.rows.item(i);
-        xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a>';
-    }
-    $('#divResult').html(xHTML);
+    renderResults: function (tx, rs) {
+        alert('in RenderResults');
+        try {
+            var xHTML = '';
+            for(var i=0; i < rs.rows.length; i++) {
+                r = rs.rows.item(i);
+                xHTML += '<b>' + r['name'] + '</b> <a href="#" onclick=\'app.CmdSend("' + r['value'] + '"); return false;\'>SEND</a>';
+            }
+            $('#divResult').html(xHTML);
+        } catch (e) {
+            alert('exception: ' + e.message;)
+        }
     },
 
     /* call this one */
     renderPatterns: function () {
         alert('in renderPatterns');
-    db.transaction(function(tx) {
-        tx.executeSql('SELECT * FROM Patterns', [], app.renderResults);
-    });
+        try {
+            db.transaction(function(tx) {
+                tx.executeSql('SELECT * FROM Patterns', [], app.renderResults);
+            });
+        } catch (e) {
+            alert('exception2: ' + e.message);
+        }
+    
 }
 };
 $(document).ready(function () {
