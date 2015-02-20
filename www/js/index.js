@@ -226,15 +226,15 @@ var app = {
     DoSend: function(i) {
         var arrVal= JSON.parse(localStorage["values"]);
         
-        bluetoothSerial.write(arrVal[i], function () { alert('success'); }, function () { alert('fail'); });
+        bluetoothSerial.write(arrVal[i], function () { /*alert('success');*/ }, function () { alert('fail'); });
     },
     CmdSend: function (v) {
-        bluetoothSerial.write(v + 'x', function () { alert('success'); }, function () { alert('fail'); });
+        bluetoothSerial.write(v + 'x', function () { /*alert('success');*/ }, function () { alert('fail'); });
     },
 
     SendTmp: function() {
         
-        bluetoothSerial.write($('#divCmd').html() + 'x', function () { alert('success'); }, function () { alert('fail'); });
+        bluetoothSerial.write($('#divCmd').html() + 'x', function () { /*alert('success');*/ }, function () { alert('fail'); });
     },
 
     Save: function() {
