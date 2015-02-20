@@ -338,3 +338,7 @@ var app = {
     
 }
 };
+
+$(function () {
+    FastClick.attach(document.body);
+});
