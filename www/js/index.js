@@ -350,7 +350,8 @@ var app = {
     },
 
     /* call this one */
-    renderPatterns: function() {
+    renderPatterns: function () {
+        alert('in renderPatterns');
     db.transaction(function(tx) {
         tx.executeSql('SELECT * FROM Patterns', [], app.renderResults);
     });
