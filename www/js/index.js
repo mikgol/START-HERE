@@ -350,7 +350,7 @@ var app = {
             }
             $('#divResult').html(xHTML);
         } catch (e) {
-            alert('exception: ' + e.message;)
+            alert('exception: ' + e.message);
         }
     },
 
