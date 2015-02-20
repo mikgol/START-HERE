@@ -233,8 +233,7 @@ var app = {
         bluetoothSerial.write(arrVal[i], function () { alert('success'); }, function () { alert('fail'); });
     },
     CmdSend: function (v) {
-        alert('in CmdSend: ' + v);
-        bluetoothSerial.write(v, function () { alert('success'); }, function () { alert('fail'); });
+        bluetoothSerial.write(v + 'x', function () { alert('success'); }, function () { alert('fail'); });
     },
 
     SendTmp: function() {
